@@ -1,0 +1,941 @@
+[
+    {
+        "id": "3f8ed385f962d022",
+        "type": "tab",
+        "label": "HTTAPI_DEMO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5b435a52a5313740",
+        "type": "tab",
+        "label": "XMP_RPC_DEMO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "30b55f5f16e1840a",
+        "type": "tab",
+        "label": "SOCKET_OUT_DEMO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "46a32542d94e5295",
+        "type": "tab",
+        "label": "SOCKET_IN_DEMO",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f21e12d7.a9512",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "Turn On",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 620,
+        "y": 420,
+        "wires": [
+            [
+                "18b352c77c28ca56"
+            ]
+        ]
+    },
+    {
+        "id": "8d81b2e6.7d0b4",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "disconnect",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "disconnect",
+        "payload": "disconnect",
+        "payloadType": "str",
+        "x": 900,
+        "y": 160,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "b1231ec7.fadc6",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "connect ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "connect",
+        "payloadType": "str",
+        "x": 910,
+        "y": 120,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "8cbc7227b2de62d7",
+        "type": "tuya-local",
+        "z": "5b435a52a5313740",
+        "d": true,
+        "devName": "Smart Color",
+        "devIp": "192.168.15.66",
+        "devId": "eb3cc5dca2952561aflfbp",
+        "devKey": "b4bd5ddaad399c2d",
+        "protocolVer": "3.3",
+        "renameSchema": "",
+        "filterCB": "",
+        "x": 1130,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c9527c030a73a73e",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "Turn OFF",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 620,
+        "y": 380,
+        "wires": [
+            [
+                "18b352c77c28ca56"
+            ]
+        ]
+    },
+    {
+        "id": "18b352c77c28ca56",
+        "type": "function",
+        "z": "5b435a52a5313740",
+        "name": "ON/OFF",
+        "func": "msg.payload ={\n   //dps : 1,\n   dps: 20,\n   set : msg.payload\n}\n\n/*\n\n    */\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 320,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "a796e73ce026e527",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "RED",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0000FFFFFFFF",
+        "payloadType": "str",
+        "x": 610,
+        "y": 460,
+        "wires": [
+            [
+                "6cf2e6fb30dd642c"
+            ]
+        ]
+    },
+    {
+        "id": "6cf2e6fb30dd642c",
+        "type": "function",
+        "z": "5b435a52a5313740",
+        "name": "COLOR",
+        "func": "msg.payload={\n    multiple: true, \n    data: {21:\"colour\",24: msg.payload }\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 360,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "a5d931252e45cf9c",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "name": "GREEN",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0078FFFFFFFF",
+        "payloadType": "str",
+        "x": 610,
+        "y": 500,
+        "wires": [
+            [
+                "6cf2e6fb30dd642c"
+            ]
+        ]
+    },
+    {
+        "id": "e8bd1d1d67101a17",
+        "type": "http request",
+        "z": "5b435a52a5313740",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://127.0.0.1:8080/webapi/json?%20%7B%22command%22%20%3A%20%22status%22%2C%20%22data%22%20%3A%20%22%22%7D",
+        "tls": "",
+        "persist": true,
+        "proxy": "",
+        "authType": "basic",
+        "x": 510,
+        "y": 240,
+        "wires": [
+            [
+                "ca8e7bde3b435be2",
+                "672034c251303192"
+            ]
+        ]
+    },
+    {
+        "id": "95f339f2c7ba891b",
+        "type": "inject",
+        "z": "5b435a52a5313740",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0",
+        "topic": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "47f49afd225ac11f"
+            ]
+        ]
+    },
+    {
+        "id": "47f49afd225ac11f",
+        "type": "function",
+        "z": "5b435a52a5313740",
+        "name": "",
+        "func": "msg.headers = {};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 240,
+        "wires": [
+            [
+                "e8bd1d1d67101a17"
+            ]
+        ]
+    },
+    {
+        "id": "ca8e7bde3b435be2",
+        "type": "switch",
+        "z": "5b435a52a5313740",
+        "name": "",
+        "property": "payload.response.idleCPU.allowed",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "50",
+                "vt": "num"
+            },
+            {
+                "t": "gt",
+                "v": "50",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "695a4091a7316e7b"
+            ],
+            [
+                "4ef2bd8543182d6e"
+            ]
+        ]
+    },
+    {
+        "id": "4ef2bd8543182d6e",
+        "type": "function",
+        "z": "5b435a52a5313740",
+        "name": "GREEN IDLE>50",
+        "func": "msg.payload={\n    multiple: true, \n    data: {21:\"colour\",24: \"0078FFFFFFFF\" }\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 260,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "695a4091a7316e7b",
+        "type": "function",
+        "z": "5b435a52a5313740",
+        "name": "RED IDLE<50",
+        "func": "msg.payload={\n    multiple: true, \n    data: {21:\"colour\",24:\"0000FFFFFFFF\" }\n};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 220,
+        "wires": [
+            [
+                "8cbc7227b2de62d7"
+            ]
+        ]
+    },
+    {
+        "id": "db93a696.5e7728",
+        "type": "tcp in",
+        "z": "30b55f5f16e1840a",
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "1881",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "/n",
+        "topic": "",
+        "base64": false,
+        "x": 160,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae588ca3.48cd3",
+        "type": "status",
+        "z": "30b55f5f16e1840a",
+        "name": "",
+        "scope": [
+            "db93a696.5e7728"
+        ],
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "808a182.9ee4268"
+            ]
+        ]
+    },
+    {
+        "id": "808a182.9ee4268",
+        "type": "switch",
+        "z": "30b55f5f16e1840a",
+        "name": "",
+        "property": "status.event",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "connect",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "a4487312.0983"
+            ]
+        ]
+    },
+    {
+        "id": "a4487312.0983",
+        "type": "function",
+        "z": "30b55f5f16e1840a",
+        "name": "Connect",
+        "func": "msg.payload='connect'+'\\n\\n'\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "60269a44.8960cc"
+            ]
+        ]
+    },
+    {
+        "id": "60269a44.8960cc",
+        "type": "function",
+        "z": "30b55f5f16e1840a",
+        "name": "Playback",
+        "func": "msg.payload=msg.payload+'sendmsg\\ncall-command:execute\\nexecute-app-name: playback\\nexecute-app-arg: misc/invalid_extension.wav\\n\\n';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 180,
+        "wires": [
+            [
+                "301c28aa.30d458"
+            ]
+        ]
+    },
+    {
+        "id": "301c28aa.30d458",
+        "type": "function",
+        "z": "30b55f5f16e1840a",
+        "name": "hangup",
+        "func": "msg.payload=msg.payload+'sendmsg\\ncall-command:execute\\nexecute-app-name: hangup';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 180,
+        "wires": [
+            [
+                "ea9b75c2.b0c65"
+            ]
+        ]
+    },
+    {
+        "id": "ea9b75c2.b0c65",
+        "type": "tcp out",
+        "z": "30b55f5f16e1840a",
+        "host": "",
+        "port": "1881",
+        "beserver": "reply",
+        "base64": false,
+        "end": false,
+        "name": "TCP OUT",
+        "x": 880,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "70748635.1ea64",
+        "type": "http in",
+        "z": "3f8ed385f962d022",
+        "name": "FreeSwitch Start /fs",
+        "url": "/fs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "6badd008.7a1ff8",
+                "b124587c9d1c168d"
+            ]
+        ]
+    },
+    {
+        "id": "6badd008.7a1ff8",
+        "type": "debug",
+        "z": "3f8ed385f962d022",
+        "name": "Request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d67373b0.b1f6f",
+        "type": "http response",
+        "z": "3f8ed385f962d022",
+        "name": "TO_FS",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "text/xml"
+        },
+        "x": 820,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f640d24.1765cb",
+        "type": "template",
+        "z": "3f8ed385f962d022",
+        "name": "On Maintenance",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "mustache",
+        "template": "<document type=\"xml/freeswitch-httapi\">\n <params></params>\n <work>\n   <playback name=\"exten\" file=\"misc/pool_closed.mp3\"/>\n   <break/>\n </work>\n</document>\n",
+        "output": "str",
+        "x": 600,
+        "y": 180,
+        "wires": [
+            [
+                "bd1b95936af6c9af"
+            ]
+        ]
+    },
+    {
+        "id": "4eee93b4.b1116c",
+        "type": "function",
+        "z": "46a32542d94e5295",
+        "name": "Detect Presence",
+        "func": "const MAC = \"f2:3a:70:86:ae:fc\";\n\nif(msg.payload.indexOf(MAC)>0){\n        \n            msg.payload = 1;\n            return msg;\n        \n}else{\n            msg.payload = 0;\n            return msg;        \n        \n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 140,
+        "wires": [
+            [
+                "1ce16c92d9eae969",
+                "f47394e8.0b8c68"
+            ]
+        ]
+    },
+    {
+        "id": "7e3bc8dd.81c438",
+        "type": "exec",
+        "z": "46a32542d94e5295",
+        "command": "/usr/sbin/arp-scan --interface=enp0s3 --localnet",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "",
+        "timer": "",
+        "winHide": false,
+        "name": "Arp-Scan",
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "4eee93b4.b1116c",
+                "f47394e8.0b8c68"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "7547f391.8ab80c",
+        "type": "inject",
+        "z": "46a32542d94e5295",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "7e3bc8dd.81c438"
+            ]
+        ]
+    },
+    {
+        "id": "f47394e8.0b8c68",
+        "type": "debug",
+        "z": "46a32542d94e5295",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "93bb6af06f07cdbd",
+        "type": "comment",
+        "z": "46a32542d94e5295",
+        "name": "",
+        "info": "This Flow, detects the presence of a mobile phone and send a message using sockets on FreeSwitch",
+        "x": 170,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "1ce16c92d9eae969",
+        "type": "switch",
+        "z": "46a32542d94e5295",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 750,
+        "y": 200,
+        "wires": [
+            [
+                "2a87a9d4e9975083"
+            ],
+            [
+                "5c46667403a07c85"
+            ]
+        ]
+    },
+    {
+        "id": "5c46667403a07c85",
+        "type": "function",
+        "z": "46a32542d94e5295",
+        "name": "GREEN (Elvis has left the building)",
+        "func": "msg.payload=\"auth ClueCon\\n\\napi originate user/1000 bossoff XML default 1000\\n\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 240,
+        "wires": [
+            [
+                "9a74c2d281ed22a3",
+                "2c3debcba109ccf9"
+            ]
+        ]
+    },
+    {
+        "id": "2a87a9d4e9975083",
+        "type": "function",
+        "z": "46a32542d94e5295",
+        "name": "RED (Elvis is on the building)",
+        "func": "msg.payload=\"auth ClueCon\\n\\napi originate user/1000 bosson XML default\\n\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 940,
+        "y": 160,
+        "wires": [
+            [
+                "9a74c2d281ed22a3",
+                "2c3debcba109ccf9"
+            ]
+        ]
+    },
+    {
+        "id": "5c2f76530444f210",
+        "type": "tuya-local",
+        "z": "3f8ed385f962d022",
+        "devName": "Wifi Plug",
+        "devIp": "192.168.15.182",
+        "devId": "ebccd0aad7e14adba3iit0",
+        "devKey": "df9e52867215e40f",
+        "protocolVer": "3.3",
+        "renameSchema": "",
+        "filterCB": "",
+        "x": 260,
+        "y": 220,
+        "wires": [
+            [
+                "475101a37041adbc",
+                "b9d2c553627757f6"
+            ]
+        ]
+    },
+    {
+        "id": "672034c251303192",
+        "type": "debug",
+        "z": "5b435a52a5313740",
+        "name": "After HTTP Request",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b9d2c553627757f6",
+        "type": "switch",
+        "z": "3f8ed385f962d022",
+        "name": "",
+        "property": "payload.dps.1",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "f640d24.1765cb"
+            ],
+            [
+                "8eaf651237abf631"
+            ]
+        ]
+    },
+    {
+        "id": "8eaf651237abf631",
+        "type": "template",
+        "z": "3f8ed385f962d022",
+        "name": "Free",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "text",
+        "syntax": "mustache",
+        "template": "<document type=\"xml/freeswitch-httapi\">\n <params></params>\n <work>\n   <playback name=\"exten\" file=\"misc/pool_open.mp3\"/>\n   <break/>\n </work>\n</document>\n",
+        "output": "str",
+        "x": 570,
+        "y": 220,
+        "wires": [
+            [
+                "bd1b95936af6c9af"
+            ]
+        ]
+    },
+    {
+        "id": "475101a37041adbc",
+        "type": "debug",
+        "z": "3f8ed385f962d022",
+        "name": "After Wifi Plug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b124587c9d1c168d",
+        "type": "function",
+        "z": "3f8ed385f962d022",
+        "name": "Save REQ/RES in flow",
+        "func": "var req={};\nvar res={};\nreq=msg.req;\nres=msg.res;\nflow.set(\"req\",req);\nflow.set(\"res\",res);\nmsg.payload=\"request\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "5c2f76530444f210"
+            ]
+        ]
+    },
+    {
+        "id": "bd1b95936af6c9af",
+        "type": "function",
+        "z": "3f8ed385f962d022",
+        "name": "Recover RES/REQ",
+        "func": "msg.res=flow.get(\"res\");\nmsg.req=flow.get(\"req\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 830,
+        "y": 180,
+        "wires": [
+            [
+                "d67373b0.b1f6f",
+                "87c012e638971d92"
+            ]
+        ]
+    },
+    {
+        "id": "87c012e638971d92",
+        "type": "debug",
+        "z": "3f8ed385f962d022",
+        "name": "Sent",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "9a74c2d281ed22a3",
+        "type": "tcp out",
+        "z": "46a32542d94e5295",
+        "host": "127.0.0.1",
+        "port": "8021",
+        "beserver": "client",
+        "base64": false,
+        "end": true,
+        "name": "FS OUT",
+        "x": 1290,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "2c3debcba109ccf9",
+        "type": "debug",
+        "z": "46a32542d94e5295",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 280,
+        "wires": []
+    }
+]
